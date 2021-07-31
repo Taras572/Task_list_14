@@ -1,0 +1,35 @@
+<hr>
+<table class="table_1">
+    <tr class>
+        <td>#</td>
+        <td>Task</td>
+        <td>Check</td>
+        <td>DONE/IN PROGRESS</td>
+        <td>Edit</td>
+        <td>DELETE</td>
+    </tr>
+    
+    <tr *ngFor="let task of Input_name; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{task.name}}</td>
+        <td>
+            <div class="form-check form-check-inline">
+                <input [checked]="!task.status" (click)="Check_btn(task)" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                <label class="form-check-label" for="inlineCheckbox1"></label>
+            </div>
+        </td>
+        <td>
+            <p *ngIf="!task.status">DONE</p>
+            <p *ngIf="task.status">IN PROGRESS</p>
+        </td>
+        <td><button (click)="Edit_btn(i)"  type="button" class="btn btn-warning">Edit</button></td>
+        <td><button [disabled]="task.status" (click)="Delete_btn(i)" type="button" class="btn btn-danger delete">Delete</button></td>
+    </tr>
+
+</table>
+<div class="input-group footer" *ngIf="isSave">
+    <input [(ngModel)]="Input_save" type="text" class="form-control"  aria-label="Recipient's username"
+        aria-describedby="button-addon2">
+    <button  (click)="Save_btn()" class="btn btn-success col-6" type="button" id="button-addon2">Save</button>
+</div>
+
